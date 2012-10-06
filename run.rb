@@ -2,14 +2,32 @@
 
 
 require './helpers/file_reader_helper.rb'
+require './controllers/commander.rb'
+require './models/command_executer.rb'
 
 class TableRobot
+  
+  
+  def initialize
+    @command_executer = CommandExecuter.new
+    @commander = Commander.new(@command_executer)
+  end
   
   def run(file_name)
     @file_reader = FileReader.new
     file_content = @file_reader.read_file_as_array(file_name)
+    execute_commands(file_content)
+  end
+  
+  def execute_commands(commands)
+    commands.each do |command|
+      execute_command(command)
+    end
     
-    puts file_content
+  end
+  
+  def execute_command(command)
+    @commander.read_command(command)    
   end
   
 end
