@@ -1,6 +1,10 @@
 class CommandExecuter
+  attr_reader :table_size, :position
+  
+  
   def initialize
-    position = {:x => nil, :y => nil, :direction => nil}
+    #directions: 1 = NORTH, 2 = EAST, 3 = SOUTH, 4 = WEST
+    @position = {:x => nil, :y => nil, :direction => nil}
     @table_size = {
       :x_min => 0,
       :x_max => 4,
@@ -15,42 +19,59 @@ class CommandExecuter
     command_array = command.split(/[\s,]+/)
     print command_array
     puts "hello " + command
-    puts position
+    puts @position
     #TODO exception on input
     belief_update_position(command_array[1].to_i, command_array[2].to_i)
-    puts position
+    puts @position
   end
 
   def execute_move_command(command)
     puts "hello " + command
-    puts position
+    puts @position
   end
   
   def execute_left_command(command)
     puts "hello " + command
-    puts position
+    puts @position
   end
   
   def execute_right_command(command)
     puts "hello " + command
-    puts position
+    puts @position
   end
   
   def execute_report_command(command)
     puts "hello " + command
-    puts position
+    puts @position
   end
   
   
-  def belief_move_to_new_position
-    #TODO validate if position is legal
-      
+  def belief_turn_clockwise
+    #TODO test nil
+    direction_new = @position[:direction]+1
+    if direction_new == 4 then
+      @position[:direction] = 0
+    else
+      @position[:direction] = direction_new
+    end
+  end  
+
+  def belief_turn_counterclockwise
+    #TODO test nil
+    direction_new = @position[:direction]-1
+    if direction_new == -1 then
+      @position[:direction] = 3
+    else
+      @position[:direction] = direction_new
+    end
   end
+
+
 
   def belief_update_position(x,y)
     if validate_legal_position(x,y) then
-      position[:x] = x
-      position[:y] = y 
+      @position[:x] = x
+      @position[:y] = y 
     else
       #TODO make proper exception here 
       puts "ERROR: Illigal move"
@@ -59,7 +80,10 @@ class CommandExecuter
   end  
   
   def validate_legal_position(x,y)
-    if x >= @table_size[:x_min] and x <= @table_size[:x_max] then
+    if x >= table_size[:x_min] and 
+      x <= table_size[:x_max] and 
+      y >= table_size[:y_min] and 
+      y <= table_size[:y_max] then
       return true
     else
       return false

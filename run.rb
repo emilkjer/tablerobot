@@ -9,9 +9,8 @@ class TableRobot
   
   
   def initialize
-    #TODO naiming convension of global commands
-    $command_executer = CommandExecuter.new
-    @commander = Commander.new($command_executer)
+    @command_executer = CommandExecuter.new
+    @commander = Commander.new(@command_executer)
   end
   
   def run(file_name)

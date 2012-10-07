@@ -1,6 +1,6 @@
 class Commander
   def initialize(command_executer)
-    $command_executer = command_executer  
+    @command_executer = command_executer  
   end
   
   def read_command(command)
