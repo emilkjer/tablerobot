@@ -83,28 +83,53 @@ describe CommandExecuter do
     end
   end 
   
-  it "is possible to turn clockwise NORTH -> EAST ON table" do
-    @command_executer.position[:direction] = 0
-    @command_executer.belief_turn_clockwise
-    @command_executer.position[:direction].should eql 1
-  end
-
-  it "is possible to turn clockwise WEST -> NORTH ON table" do
-    @command_executer.position[:direction] = 3
-    @command_executer.belief_turn_clockwise
-    @command_executer.position[:direction].should eql 0
+  
+  describe "#belief_turn_clockwise" do
+    it "is possible to turn clockwise NORTH -> EAST ON table" do
+      @command_executer.position[:direction] = 0
+      @command_executer.belief_turn_clockwise
+      @command_executer.position[:direction].should eql 1
+    end
+  
+    it "is possible to turn clockwise WEST -> NORTH ON table" do
+      @command_executer.position[:direction] = 3
+      @command_executer.belief_turn_clockwise
+      @command_executer.position[:direction].should eql 0
+    end
   end
   
-  it "is possible to turn clockwise NORTH -> WEST ON table" do
-    @command_executer.position[:direction] = 0
-    @command_executer.belief_turn_counterclockwise
-    @command_executer.position[:direction].should eql 3
-  end
-
-  it "is possible to turn clockwise EAST -> NORTH ON table" do
-    @command_executer.position[:direction] = 1
-    @command_executer.belief_turn_counterclockwise
-    @command_executer.position[:direction].should eql 0
+  describe "#belief_turn_counterclockwise" do
+    it "is possible to turn clockwise NORTH -> WEST ON table" do
+      @command_executer.position[:direction] = 0
+      @command_executer.belief_turn_counterclockwise
+      @command_executer.position[:direction].should eql 3
+    end
+  
+    it "is possible to turn clockwise EAST -> NORTH ON table" do
+      @command_executer.position[:direction] = 1
+      @command_executer.belief_turn_counterclockwise
+      @command_executer.position[:direction].should eql 0
+    end
+  end  
+  
+  describe "#validate_is_on_table" do
+    it "is on the table" do
+      @command_executer.position[:direction] = 0
+      @command_executer.position[:x] = 0
+      @command_executer.position[:y] = 0
+      @command_executer.validate_is_on_table.should be true
+    end
+    
+    it "is NOT on the table" do
+      @command_executer.position[:direction] = nil
+      @command_executer.position[:x] = nil
+      @command_executer.position[:y] = nil
+      @command_executer.validate_is_on_table.should_not be true
+    end
+    
+    it "is initially NOT be on the table" do
+      @command_executer.validate_is_on_table.should_not be true
+    end
   end
 
 end

@@ -26,21 +26,33 @@ class CommandExecuter
   end
 
   def execute_move_command(command)
+    if not validate_is_on_table then
+      return
+    end
     puts "hello " + command
     puts @position
   end
   
   def execute_left_command(command)
+    if not validate_is_on_table then
+      return
+    end
     puts "hello " + command
     puts @position
   end
   
   def execute_right_command(command)
+    if not validate_is_on_table then
+      return
+    end
     puts "hello " + command
     puts @position
   end
   
   def execute_report_command(command)
+    if not validate_is_on_table then
+      return
+    end
     puts "hello " + command
     puts @position
   end
@@ -66,8 +78,6 @@ class CommandExecuter
     end
   end
 
-
-
   def belief_update_position(x,y)
     if validate_legal_position(x,y) then
       @position[:x] = x
@@ -90,4 +100,12 @@ class CommandExecuter
     end
   end
    
+  def validate_is_on_table
+    #Check if the robot is on the table
+    if position[:direction] != nil then
+      return true
+    else
+      return false
+    end
+  end
 end
