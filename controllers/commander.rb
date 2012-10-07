@@ -1,6 +1,6 @@
 class Commander
   def initialize(command_executer)
-    @command_executer = command_executer  
+    $command_executer = command_executer  
   end
   
   def read_command(command)
@@ -12,16 +12,21 @@ class Commander
     case  control
     when "PLACE"
       puts "PLACE: " + command
-      @command_executer.execute_command(command)
+      $command_executer.execute_place_command(command)
     when "MOVE"
       puts "MOVE: " + command
+      $command_executer.execute_move_command(command)
     when "LEFT"
       puts "LEFT: " + command
+      $command_executer.execute_left_command(command)
     when "RIGHT"
       puts "RIGHT: " + command
+      $command_executer.execute_right_command(command)
     when "REPORT"
       puts "REPORT: " + command
+      $command_executer.execute_report_command(command)
     else
+      #TODO doe something to respond here
       puts "UNKNOWN: " + command
     end  
   end

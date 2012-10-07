@@ -1,16 +1,17 @@
 #!/usr/bin/env ruby
 
 
-require './helpers/file_reader_helper.rb'
-require './controllers/commander.rb'
-require './models/command_executer.rb'
+require_relative './helpers/file_reader_helper.rb'
+require_relative './controllers/commander.rb'
+require_relative './models/command_executer.rb'
 
 class TableRobot
   
   
   def initialize
-    @command_executer = CommandExecuter.new
-    @commander = Commander.new(@command_executer)
+    #TODO naiming convension of global commands
+    $command_executer = CommandExecuter.new
+    @commander = Commander.new($command_executer)
   end
   
   def run(file_name)
@@ -38,7 +39,8 @@ if __FILE__ == $0
   #TODO improvement: fetch input --filename param
   if ARGV.length <0 then
     #TODO write run command guide
-    puts "ruby run.rb data/hello_world.dat"
+    puts "Usage: ruby run.rb <DATAFILE>"
+    puts "E.g. ruby run.rb data/hello_world.dat"
   else
     x = TableRobot.new
     x.run(ARGV.first)
