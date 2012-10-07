@@ -6,14 +6,17 @@ class FileReader
       return file_content
     rescue => err
       puts "Exception: #{err}"
-      err
+      return err
     end
   end
   
   def read_file_as_array(file_name)
-    file_content = read_file(file_name)
-    result = file_content.split(/[\n]+/)
-    return result
+    begin
+      file_content = read_file(file_name)
+      result = file_content.split(/[\n]+/)
+      return result
+    rescue
+      return false
+    end
   end
-
 end

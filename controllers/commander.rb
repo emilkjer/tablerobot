@@ -11,23 +11,18 @@ class Commander
     #We have a limited numer of options so a switch is used 
     case  control
     when "PLACE"
-      puts "PLACE: " + command
-      $command_executer.execute_place_command(command)
+      @command_executer.execute_place_command(command)
     when "MOVE"
-      puts "MOVE: " + command
-      $command_executer.execute_move_command(command)
+      @command_executer.execute_move_command
     when "LEFT"
-      puts "LEFT: " + command
-      $command_executer.execute_left_command(command)
+      @command_executer.execute_left_command
     when "RIGHT"
-      puts "RIGHT: " + command
-      $command_executer.execute_right_command(command)
+      @command_executer.execute_right_command
     when "REPORT"
-      puts "REPORT: " + command
-      $command_executer.execute_report_command(command)
+      @command_executer.execute_report_command
     else
       #TODO doe something to respond here
-      puts "UNKNOWN: " + command
+      puts "ERROR: UNKNOWN COMMAND: " + command
     end  
   end
   

@@ -17,6 +17,33 @@ describe CommandExecuter do
     end
   end
   
+  describe "#execute_place_command" do
+    it "is legal to input PLACE 0,0,NORTH" do
+      @command_executer.execute_place_command('PLACE 0,0,NORTH')
+      @command_executer.position.should include(:x => 0, :y => 0,:direction => 0)
+    end
+    
+    it "is NOT legal to input PLACE 0,-1,NORTH" do
+      @command_executer.execute_place_command('PLACE 0,-1,NORTH')
+      @command_executer.position.should include(:x => nil, :y => nil,:direction => nil)
+    end
+    
+    it "is NOT legal to input PLACE a,b,NORTH" do
+      @command_executer.execute_place_command('PLACE a,b,NORTH')
+      @command_executer.position.should include(:x => nil, :y => nil,:direction => nil)
+    end
+    
+    it "is NOT legal to input PLACE 0,0" do
+      @command_executer.execute_place_command('PLACE 0,0')
+      @command_executer.position.should include(:x => nil, :y => nil,:direction => nil)
+    end
+    
+    it "is NOT legal to input PLACE NORTH" do
+      @command_executer.execute_place_command('PLACE NORTH')
+      @command_executer.position.should include(:x => nil, :y => nil,:direction => nil)
+    end
+  end
+  
   describe "#validate_legal_position" do
     it "is legal to position (0,0) edge min" do
       x = 0
@@ -130,6 +157,67 @@ describe CommandExecuter do
     it "is initially NOT be on the table" do
       @command_executer.validate_is_on_table.should_not be true
     end
+  end
+
+  describe "#belief_move_forwards" do
+    it "move NORTH from (0,0)" do
+      x = 0
+      y = 0
+      @command_executer.position[:direction] = 0
+      @command_executer.position[:x] = x
+      @command_executer.position[:y] = y
+      @command_executer.belief_move_forwards
+      @command_executer.position.should include(:x => x, :y => y+1)
+    end
+    it "move SOUTH from (4,4)" do
+      x = 4
+      y = 4
+      @command_executer.position[:direction] = 2
+      @command_executer.position[:x] = x
+      @command_executer.position[:y] = y
+      @command_executer.belief_move_forwards
+      @command_executer.position.should include(:x => x, :y => y-1)
+    end
+    it "move EAST from (2,2)" do
+      x = 2
+      y = 2
+      @command_executer.position[:direction] = 1
+      @command_executer.position[:x] = x
+      @command_executer.position[:y] = y
+      @command_executer.belief_move_forwards
+      @command_executer.position.should include(:x => x+1, :y => y)
+    end
+    
+    
+    it "does NOT move NORTH from (0,4)" do
+      x = 0
+      y = 4
+      @command_executer.position[:direction] = 0
+      @command_executer.position[:x] = x
+      @command_executer.position[:y] = y
+      @command_executer.belief_move_forwards
+      @command_executer.position.should include(:x => x, :y => y)
+    end
+    it "does NOT move SOUTH from (0,0)" do
+      x = 0
+      y = 0
+      @command_executer.position[:direction] = 2
+      @command_executer.position[:x] = x
+      @command_executer.position[:y] = y
+      @command_executer.belief_move_forwards
+      @command_executer.position.should include(:x => x, :y => y)
+    end
+    it "does NOT move WEST from (0,0)" do
+      x = 0
+      y = 0
+      @command_executer.position[:direction] = 3
+      @command_executer.position[:x] = x
+      @command_executer.position[:y] = y
+      @command_executer.belief_move_forwards
+      @command_executer.position.should include(:x => x, :y => y)
+    end
+    
+
   end
 
 end
