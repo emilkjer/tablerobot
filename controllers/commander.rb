@@ -1,10 +1,17 @@
+=begin
+  * Name: Toy Robot Simulator 
+  * Description: Control class for movements
+  * @Author: Emil Kjer
+  * Date: 9/10/2012
+=end
+
 class Commander
   def initialize(command_executer)
     @command_executer = command_executer  
   end
   
   def read_command(command)
-    #TODO refactor this a bit nicer
+    #Split command and get control parameter 
     command_clean = command.split(' ')
     control = command_clean[0].upcase
     
@@ -21,9 +28,7 @@ class Commander
     when "REPORT"
       @command_executer.execute_report_command
     else
-      #TODO doe something to respond here
       puts "ERROR: UNKNOWN COMMAND: " + command
     end  
   end
-  
 end

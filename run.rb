@@ -1,12 +1,16 @@
 #!/usr/bin/env ruby
+=begin
+  * Name: Toy Robot Simulator 
+  * Description: Main run class to run with data form file.
+  * @Author: Emil Kjer
+  * Date: 9/10/2012
+=end
 
 require_relative './helpers/file_reader_helper.rb'
 require_relative './controllers/commander.rb'
 require_relative './models/command_executer.rb'
 
 class TableRobot
-  
-  
   def initialize
     @command_executer = CommandExecuter.new
     @commander = Commander.new(@command_executer)
@@ -42,16 +46,11 @@ end
 
 
 if __FILE__ == $0
-  #TODO some verification of the input argument should be performed here
-  #TODO improvement: fetch input --filename param
-  
   x = TableRobot.new
   
   if ARGV.length <0 then
-    #TODO write run command guide
     x.display_usage
   else
-    
     x.run(ARGV.first)
   end
   

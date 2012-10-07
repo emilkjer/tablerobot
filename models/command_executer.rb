@@ -1,3 +1,10 @@
+=begin
+  * Name: Toy Robot Simulator 
+  * Description: Model for validating and executing commands
+  * @Author: Emil Kjer
+  * Date: 9/10/2012
+=end
+
 class CommandExecuter
   attr_reader :table_size, :position
   require 'Set'  
@@ -200,6 +207,7 @@ class CommandExecuter
   
   
   def validate_legal_position(x,y)
+    #Check if coordinates are within table
     if x >= table_size[:x_min] and 
       x <= table_size[:x_max] and 
       y >= table_size[:y_min] and 

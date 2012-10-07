@@ -5,7 +5,6 @@ describe CommandExecuter do
     @command_executer = CommandExecuter.new
   end
   
-  #TODO this might not be a valuable test
   describe "#initialize" do
     it "has a position" do
       @command_executer.position[:x].should eql nil
