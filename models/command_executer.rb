@@ -2,7 +2,7 @@
   * Name: Toy Robot Simulator 
   * Description: Model for validating and executing commands
   * @Author: Emil Kjer
-  * Date: 9/10/2012
+  * Date: 8/10/2012
 =end
 
 class CommandExecuter

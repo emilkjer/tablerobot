@@ -1,7 +1,7 @@
 Toy Robot Simulator
 ==========
 By Emil Kjer
-Date: 09/10/2012
+Date: 08/10/2012
 ==========
 
 Usage: ruby run.rb <DATAFILE>

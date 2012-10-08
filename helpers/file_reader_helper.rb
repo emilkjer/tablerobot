@@ -4,7 +4,7 @@
   *   Read data file. 
   *   Commands are separated by newline separator.
   * @Author: Emil Kjer
-  * Date: 9/10/2012
+  * Date: 8/10/2012
 =end
 
 class FileReader
@@ -25,7 +25,7 @@ class FileReader
       file_content = read_file(file_name)
       result = file_content.split(/[\n]+/)
       return result
-    rescue
+    rescue      
       return false
     end
   end

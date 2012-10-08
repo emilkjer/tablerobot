@@ -1,3 +1,10 @@
+=begin
+  * Name: Toy Robot Simulator 
+  * Description: Test of the controller model of the table robot.
+  * @Author: Emil Kjer
+  * Date: 8/10/2012
+=end
+
 require 'spec_helper'
 
 describe CommandExecuter do
@@ -12,7 +19,6 @@ describe CommandExecuter do
     
     it "has a table size" do
       @command_executer.table_size.should_not eql nil
-      # @command_executer.table_size[:x_min].should eql 0
     end
   end
   
